@@ -36,6 +36,11 @@ public class Divida {
         return this.getValor().subtract(this.getValorQuitado());
     }
 
+    /**
+     * Usa o valor restante e divide com as prestacoes restantes para saber
+     * quanto deve ser pago por mes
+     * @return o valor por prestacao que ainda deve ser pago
+     */
     public BigDecimal getValorPorPrestacao() {
         int prestacoesRestantes = this.prestacoes - this.prestacoesQuitadas;
         return this.getValorRestante().divide(BigDecimal.valueOf(prestacoesRestantes));
