@@ -1,15 +1,18 @@
 package br.com.felipe.renegociacao.models;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Getter
+@Data
 public class Divida {
     private BigDecimal valor;
     private int prestacoes;
     private BigDecimal valorQuitado;
     private int prestacoesQuitadas;
+
+    // Usado para conversão JSON
+    public Divida() {}
 
     public Divida(BigDecimal valor, int prestacoes) {
         this.valor = valor;
