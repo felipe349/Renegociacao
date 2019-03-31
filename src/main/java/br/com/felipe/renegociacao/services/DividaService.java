@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DividaService {
     BigDecimal agruparValorRestanteDasDividas(List<Divida> dividas);
+
+    Divida simularPagamento(BigDecimal valorTotal, BigDecimal entrada, int prestacoes);
 }

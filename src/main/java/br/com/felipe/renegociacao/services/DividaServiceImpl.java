@@ -18,4 +18,10 @@ public class DividaServiceImpl implements DividaService {
     public BigDecimal agruparValorRestanteDasDividas(List<Divida> dividas) {
         return dividas.stream().map(Divida::getValorRestante).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    @Override
+    public Divida simularPagamento(BigDecimal valorTotal, BigDecimal entrada, int prestacoes) {
+        return null;
+    }
+
 }

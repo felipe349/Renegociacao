@@ -14,12 +14,13 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class DividaServiceImplTest {
 
+    private DividaService dividaService = new DividaServiceImpl();
+
     @Test
     public void dado_duasDividas_quando_agruparDividasChamado_entao_retornarUmaDividaAcumulada() {
         List<Divida> listaDivida = new ArrayList<>();
         listaDivida.add(new Divida(new BigDecimal(5000), 12));
         listaDivida.add(new Divida(new BigDecimal(3200), 6));
-        DividaService dividaService = new DividaServiceImpl();
         BigDecimal valorAgrupado = dividaService.agruparValorRestanteDasDividas(listaDivida);
         assertEquals(BigDecimal.valueOf(8200), valorAgrupado);
     }
@@ -29,8 +30,17 @@ public class DividaServiceImplTest {
         List<Divida> listaDivida = new ArrayList<>();
         listaDivida.add(new Divida(new BigDecimal(7800), 4, new BigDecimal(3000), 2));
         listaDivida.add(new Divida(new BigDecimal(2000), 6, new BigDecimal(100), 6));
-        DividaService dividaService = new DividaServiceImpl();
         BigDecimal valorAgrupado = dividaService.agruparValorRestanteDasDividas(listaDivida);
         assertEquals(BigDecimal.valueOf(6700), valorAgrupado);
+    }
+
+    @Test
+    public void dado_umaDivida_quandoSimularPagamentoChamado_entao_retornarValorDasPrestacoes() {
+        BigDecimal valorTotal = new BigDecimal(10000);
+        BigDecimal entrada = new BigDecimal(2000);
+        int prestacoes = 10;
+        Divida novaDivida = dividaService.simularPagamento(valorTotal, entrada, prestacoes);
+        assertEquals(BigDecimal.valueOf(8800), novaDivida.getValorRestante());
+        assertEquals(BigDecimal.valueOf(880), novaDivida.getValorPorPrestacao());
     }
 }
