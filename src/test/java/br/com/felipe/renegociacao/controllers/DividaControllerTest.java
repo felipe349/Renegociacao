@@ -14,7 +14,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -36,5 +37,17 @@ public class DividaControllerTest {
         String jsonObject = om.writeValueAsString(listaDivida);
         this.mockMvc.perform(post("/api/v1/divida/agrupar").contentType("application/json").content(jsonObject))
                 .andDo(print()).andExpect(content().string(equalTo("5000")));
+    }
+
+    @Test
+    public void dado_dadosDeUmaSimulacao_quando_endpointSimularChamado_entao_retornarDividaSimulada() throws Exception {
+        String valorAcumulado = "1000";
+        String entrada = "500";
+        String prestacoes = "5";
+        this.mockMvc.perform(get("/api/v1/divida/simular")
+                .param("valorAcumulado", valorAcumulado)
+                .param("entrada", entrada)
+                .param("prestacoes", prestacoes))
+        .andExpect(content().string(containsString("\"valor\":575.00")));
     }
 }
