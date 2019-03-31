@@ -4,6 +4,8 @@ import br.com.felipe.renegociacao.models.Divida;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -29,11 +31,11 @@ public class DividaServiceImpl implements DividaService {
      */
     @Override
     public Divida simularPagamento(BigDecimal valorAcumulado, BigDecimal entrada, int prestacoes) {
-        double juros = 5 + (prestacoes * 0.5);
+        double juros = 1 + (5 + (prestacoes * 0.5)) / 100;
         BigDecimal valorRestante = valorAcumulado.subtract(entrada);
-        BigDecimal acrescimoDeJuros = valorAcumulado.divide(BigDecimal.valueOf(juros));
-        valorRestante = valorRestante.add(acrescimoDeJuros);
-        return new Divida(valorRestante, prestacoes);
+        BigDecimal valorComJuros = valorAcumulado.multiply(BigDecimal.valueOf(juros));
+        BigDecimal valorRestanteComJuros = valorComJuros.subtract(valorRestante);
+        return new Divida(valorRestanteComJuros, prestacoes);
     }
 
 }
