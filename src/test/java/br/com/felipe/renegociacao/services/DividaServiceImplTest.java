@@ -40,7 +40,7 @@ public class DividaServiceImplTest {
         BigDecimal entrada = new BigDecimal(2000);
         int prestacoes = 10;
         Divida novaDivida = dividaService.simularPagamento(valorTotal, entrada, prestacoes);
-        assertEquals(BigDecimal.valueOf(9000), novaDivida.getValor());
-        assertEquals(BigDecimal.valueOf(900), novaDivida.getValorPorPrestacao());
+        assertEquals(BigDecimal.valueOf(9000.0), novaDivida.getValor());
+        assertEquals(BigDecimal.valueOf(900.0), novaDivida.getValorPorPrestacao());
     }
 }
