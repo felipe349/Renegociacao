@@ -19,6 +19,14 @@ public class DividaServiceImpl implements DividaService {
         return dividas.stream().map(Divida::getValorRestante).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    /**
+     * Simula o pagamento da divida atraves de um calculo de juros em cima do valor total da divida, de acordo com
+     * o numero de prestacoes o juros aumenta
+     * @param valorAcumulado da divida
+     * @param entrada de pagamento para a renegociacao
+     * @param prestacoes em que se deseja pagar a divida
+     * @return nova divida contendo valor atualizado com juros e prestacoes
+     */
     @Override
     public Divida simularPagamento(BigDecimal valorAcumulado, BigDecimal entrada, int prestacoes) {
         double juros = 5 + (prestacoes * 0.5);
