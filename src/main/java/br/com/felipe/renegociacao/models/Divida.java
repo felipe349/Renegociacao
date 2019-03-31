@@ -25,6 +25,10 @@ public class Divida {
         this.prestacoesQuitadas = prestacoesQuitadas;
     }
 
+    /**
+     * Subtrai o valor quitado com o valor original da divida
+     * @return o valor restante a ser pago da divida
+     */
     public BigDecimal getValorRestante() {
         return this.getValor().subtract(this.getValorQuitado());
     }
