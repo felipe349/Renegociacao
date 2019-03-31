@@ -37,7 +37,7 @@ public class Divida {
     }
 
     public BigDecimal getValorPorPrestacao() {
-        int prestacoesRestantes = this.prestacoesQuitadas - this.prestacoes;
+        int prestacoesRestantes = this.prestacoes - this.prestacoesQuitadas;
         return this.getValorRestante().divide(BigDecimal.valueOf(prestacoesRestantes));
     }
 }

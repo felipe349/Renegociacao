@@ -20,8 +20,12 @@ public class DividaServiceImpl implements DividaService {
     }
 
     @Override
-    public Divida simularPagamento(BigDecimal valorTotal, BigDecimal entrada, int prestacoes) {
-        return null;
+    public Divida simularPagamento(BigDecimal valorAcumulado, BigDecimal entrada, int prestacoes) {
+        double juros = 5 + (prestacoes * 0.5);
+        BigDecimal valorRestante = valorAcumulado.subtract(entrada);
+        BigDecimal acrescimoDeJuros = valorAcumulado.divide(BigDecimal.valueOf(juros));
+        valorRestante = valorRestante.add(acrescimoDeJuros);
+        return new Divida(valorRestante, prestacoes);
     }
 
 }
